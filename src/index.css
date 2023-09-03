@@ -1,0 +1,80 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    background-color: #000;
+    color: #7c5bec;
+    font-family: 'Inter', sans-serif;
+}
+
+h1 {
+    color: #7c5bec;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 60px;
+}
+
+.main-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #111;
+    border-radius: 5px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-task {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    background-color: #333;
+    color: #dcdcdc;
+    border-radius: 5px;
+}
+
+.add-button {
+    background-color: #7c5bec;
+    color: #dcdcdc;
+    border: none;
+    padding: 10px 9px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.checked {
+    text-decoration: line-through;
+    /* color: #8d8d8d; */
+    color: #424141;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.checkbox-input {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    accent-color: #7c5bec;
+}
+
+.task-text {
+    flex-grow: 1;
+    font-size: 25px;
+    color: #dcdcdc;
+}
+
+.task-item .checkbox-input:checked ~ .task-text {
+    color: #555;
+}
