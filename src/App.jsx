@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TaskList from './component/TaskList';
 
 export default function App() {
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState(() => {
+    const storedTasks = localStorage.getItem('tasks');
+
+    return storedTasks ? JSON.parse(storedTasks) : [];
+  });
+
   const [newTask, setNewTask] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(taskList));
+  }, [taskList]);
 
   function createTask(event) {
     setNewTask(event.target.value);
@@ -12,17 +21,17 @@ export default function App() {
   function submissionTest(event) {
     event.preventDefault();
     if (newTask.trim() !== '') {
-      setTaskList([...taskList, newTask]);
+      const newTaskList = [...taskList, { text: newTask, isChecked: false }];
+      setTaskList(newTaskList);
       setNewTask('');
     }
   }
-  
-  const tasks = taskList.map((item, index) => (
-    <TaskList 
-      key = {index}
-      item = {item}
-    />
-  ));
+
+  function toggleTask(index) {
+    const updatedTaskList = [...taskList];
+    updatedTaskList[index].isChecked = !updatedTaskList[index].isChecked;
+    setTaskList(updatedTaskList);
+  }
 
   return (
     <>
@@ -38,7 +47,14 @@ export default function App() {
         />
         <button className="add-button">Add Task</button>
       </form>
-      {tasks}
+      {taskList.map((item, index) => (
+        <TaskList 
+          key={index}
+          item={item.text}
+          isChecked={item.isChecked}
+          onToggle={() => toggleTask(index)}
+        />
+      ))}
     </div>
   </>
   );

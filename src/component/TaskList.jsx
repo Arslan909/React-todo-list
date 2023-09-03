@@ -3,9 +3,15 @@ import React from "react"
 
 export default function TaskList(prop){
     const [isChecked, setIsChecked] = React.useState(false)
+    
+    React.useEffect(() => {
+        setIsChecked(prop.isChecked);
+      }, [prop.isChecked]);
 
     function handelcheck(){
-        setIsChecked(!isChecked)
+        const newCheckedState = !isChecked;
+        setIsChecked(newCheckedState);
+        prop.onToggle(newCheckedState);
     }
     return(
         <div className={isChecked ? "task-item checked" : "task-item"}>
